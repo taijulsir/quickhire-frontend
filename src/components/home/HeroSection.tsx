@@ -49,7 +49,7 @@ export default function HeroSection() {
               Great platform for the job seeker that searching for new career heights and passionate about startups.
             </p>
 
-            <form onSubmit={handleSearch} className="mt-10 bg-white rounded-lg shadow-[0_20px_40px_rgba(0,0,0,0.04)] border border-gray-100 p-2 flex flex-col sm:flex-row w-full relative z-30">
+            <form onSubmit={handleSearch} className="mt-10 bg-white rounded-lg shadow-[0_20px_40px_rgba(0,0,0,0.08)] border border-gray-100 p-2 flex flex-col sm:flex-row w-full relative z-30 lg:w-[110%] lg:shadow-xl">
               <div className="flex-[1.2] flex items-center gap-3 px-4 py-3 sm:border-r border-gray-200">
                 <svg className="w-5 h-5 text-gray-400 flex-shrink-0" fill="none" stroke="currentColor" viewBox="0 0 24 24">
                   <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M21 21l-6-6m2-5a7 7 0 11-14 0 7 7 0 0114 0z" />

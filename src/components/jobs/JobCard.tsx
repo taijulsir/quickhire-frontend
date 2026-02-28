@@ -1,6 +1,8 @@
 import Link from 'next/link';
+import Image from 'next/image';
 import { Job } from '@/types';
 import { Tag } from '@/components/common';
+import { BASE_URL } from '@/services/api';
 
 interface JobCardProps {
   job: Job;
@@ -23,9 +25,14 @@ export default function JobCard({ job }: JobCardProps) {
       className="block p-6 border border-gray-200 rounded-lg hover:border-indigo-300 hover:shadow-lg transition-all bg-white"
     >
       <div className="flex items-start justify-between mb-4">
-        <div className="w-14 h-14 bg-gray-100 rounded-lg flex items-center justify-center">
+        <div className="w-14 h-14 bg-gray-100 rounded-lg flex items-center justify-center overflow-hidden relative">
           {job.companyLogo ? (
-            <img src={job.companyLogo} alt={job.company} className="w-10 h-10 object-contain" />
+            <Image 
+              src={job.companyLogo.startsWith('/images') ? job.companyLogo : job.companyLogo} 
+              alt={job.company} 
+              fill
+              className="object-cover" 
+            />
           ) : (
             <span className="text-gray-600 font-bold">{getCompanyInitials(job.company)}</span>
           )}
