@@ -2,31 +2,36 @@
 
 import { useState } from 'react';
 import Link from 'next/link';
+import { Eye, Trash2, Edit2 } from 'lucide-react';
 import { Job } from '@/types';
 import { Button } from '@/components/common';
 import { jobService } from '@/services';
+import { BASE_URL } from '@/services/api';
 
 interface JobListProps {
   jobs: Job[];
   onDelete: (id: string) => void;
+  onEdit: (job: Job) => void;
 }
 
-export default function JobList({ jobs, onDelete }: JobListProps) {
+export default function JobList({ jobs, onDelete, onEdit }: JobListProps) {
   const [deletingId, setDeletingId] = useState<string | null>(null);
+  const [jobToDelete, setJobToDelete] = useState<string | null>(null);
 
-  const handleDelete = async (id: string) => {
-    if (!confirm('Are you sure you want to delete this job?')) return;
+  const confirmDelete = async () => {
+    if (!jobToDelete) return;
 
-    setDeletingId(id);
+    setDeletingId(jobToDelete);
     try {
-      const response = await jobService.delete(id);
+      const response = await jobService.delete(jobToDelete);
       if (response.success) {
-        onDelete(id);
+        onDelete(jobToDelete);
       }
     } catch (error) {
       alert(error instanceof Error ? error.message : 'Failed to delete job');
     } finally {
       setDeletingId(null);
+      setJobToDelete(null);
     }
   };
 
@@ -36,7 +41,7 @@ export default function JobList({ jobs, onDelete }: JobListProps) {
 
   if (jobs.length === 0) {
     return (
-      <div className="text-center py-12 bg-gray-50 rounded-lg">
+      <div className="text-center py-12 bg-gray-50 rounded-lg h-full flex flex-col items-center justify-center">
         <svg
           className="w-12 h-12 text-gray-400 mx-auto mb-4"
           fill="none"
@@ -60,62 +65,103 @@ export default function JobList({ jobs, onDelete }: JobListProps) {
   }
 
   return (
-    <div className="overflow-x-auto">
-      <table className="w-full">
-        <thead>
-          <tr className="border-b border-gray-200">
-            <th className="text-left py-3 px-4 font-medium text-gray-500 text-sm">Job</th>
-            <th className="text-left py-3 px-4 font-medium text-gray-500 text-sm">Category</th>
-            <th className="text-left py-3 px-4 font-medium text-gray-500 text-sm">Location</th>
-            <th className="text-left py-3 px-4 font-medium text-gray-500 text-sm">Type</th>
-            <th className="text-right py-3 px-4 font-medium text-gray-500 text-sm">Actions</th>
-          </tr>
-        </thead>
-        <tbody>
-          {jobs.map((job) => (
-            <tr key={job._id} className="border-b border-gray-100 hover:bg-gray-50">
-              <td className="py-4 px-4">
-                <div className="flex items-center gap-3">
-                  <div className="w-10 h-10 bg-gray-100 rounded-lg flex items-center justify-center">
-                    <span className="text-gray-600 font-bold text-xs">{getCompanyInitials(job.company)}</span>
-                  </div>
-                  <div>
-                    <div className="font-medium text-gray-900">{job.title}</div>
-                    <div className="text-sm text-gray-500">{job.company}</div>
-                  </div>
-                </div>
-              </td>
-              <td className="py-4 px-4">
-                <span className="px-2 py-1 text-xs font-medium bg-indigo-50 text-indigo-600 rounded">
-                  {job.category}
-                </span>
-              </td>
-              <td className="py-4 px-4 text-sm text-gray-500">{job.location}</td>
-              <td className="py-4 px-4">
-                <span className="px-2 py-1 text-xs font-medium bg-green-50 text-green-600 rounded">
-                  {job.type}
-                </span>
-              </td>
-              <td className="py-4 px-4 text-right">
-                <div className="flex items-center justify-end gap-2">
-                  <Link href={`/jobs/${job._id}`}>
-                    <Button variant="outline" size="sm">View</Button>
-                  </Link>
-                  <Button
-                    variant="outline"
-                    size="sm"
-                    onClick={() => handleDelete(job._id)}
-                    isLoading={deletingId === job._id}
-                    className="text-red-600 hover:text-red-700 hover:bg-red-50 border-red-200"
-                  >
-                    Delete
-                  </Button>
-                </div>
-              </td>
+    <>
+      <div className="flex-1 overflow-y-auto min-h-0 bg-white">
+        <table className="w-full relative">
+          <thead className="sticky top-0 bg-gray-50 z-10 shadow-xs">
+            <tr>
+              <th className="text-left py-3 px-4 font-medium text-gray-500 text-sm">Job</th>
+              <th className="text-left py-3 px-4 font-medium text-gray-500 text-sm">Category</th>
+              <th className="text-left py-3 px-4 font-medium text-gray-500 text-sm">Location</th>
+              <th className="text-left py-3 px-4 font-medium text-gray-500 text-sm">Type</th>
+              <th className="text-right py-3 px-4 font-medium text-gray-500 text-sm">Actions</th>
             </tr>
-          ))}
-        </tbody>
-      </table>
-    </div>
+          </thead>
+          <tbody>
+            {jobs.map((job) => (
+              <tr key={job._id} className="border-b border-gray-100 hover:bg-gray-50">
+                <td className="py-4 px-4">
+                  <div className="flex items-center gap-3">
+                    <div className="w-10 h-10 bg-white border border-gray-200 rounded-lg flex items-center justify-center overflow-hidden">
+                      {job.companyLogo ? (
+                        <img
+                          src={job.companyLogo.startsWith('http') ? job.companyLogo : `${BASE_URL}${job.companyLogo}`}
+                          alt={job.company}
+                          className="w-full h-full object-contain p-1"
+                        />
+                      ) : (
+                        <span className="text-gray-600 font-bold text-xs">{getCompanyInitials(job.company)}</span>
+                      )}
+                    </div>
+                    <div>
+                      <div className="font-medium text-gray-900">{job.title}</div>
+                      <div className="text-sm text-gray-500">{job.company}</div>
+                    </div>
+                  </div>
+                </td>
+                <td className="py-4 px-4">
+                  <span className="px-2 py-1 text-xs font-medium bg-indigo-50 text-indigo-600 rounded">
+                    {job.category}
+                  </span>
+                </td>
+                <td className="py-4 px-4 text-sm text-gray-500">{job.location}</td>
+                <td className="py-4 px-4">
+                  <span className="px-2 py-1 text-xs font-medium bg-green-50 text-green-600 rounded">
+                    {job.type}
+                  </span>
+                </td>
+                <td className="py-4 px-4 text-right">
+                  <div className="flex items-center justify-end gap-2">
+                    <button
+                      title="Edit Job"
+                      onClick={() => onEdit(job)}
+                      className="p-2 text-gray-400 hover:text-blue-600 hover:bg-blue-50 rounded-lg transition-colors"
+                    >
+                      <Edit2 className="w-5 h-5" />
+                    </button>
+                    <Link href={`/jobs/${job._id}`} title="View Job">
+                      <button className="p-2 text-gray-400 hover:text-indigo-600 hover:bg-indigo-50 rounded-lg transition-colors">
+                        <Eye className="w-5 h-5" />
+                      </button>
+                    </Link>
+                    <button
+                      title="Delete Job"
+                      onClick={() => setJobToDelete(job._id)}
+                      disabled={deletingId === job._id}
+                      className="p-2 text-gray-400 hover:text-red-600 hover:bg-red-50 rounded-lg transition-colors disabled:opacity-50"
+                    >
+                      <Trash2 className="w-5 h-5" />
+                    </button>
+                  </div>
+                </td>
+              </tr>
+            ))}
+          </tbody>
+        </table>
+      </div>
+
+      {jobToDelete && (
+        <div className="fixed inset-0 z-60 flex items-center justify-center bg-black/50 backdrop-blur-sm px-4">
+          <div className="bg-white rounded-2xl shadow-xl w-full max-w-sm overflow-hidden flex flex-col relative">
+            <div className="p-6">
+              <h3 className="text-lg font-bold text-gray-900 mb-2">Delete Job</h3>
+              <p className="text-gray-600 mb-6">Are you sure you want to delete this job posting? This action cannot be undone.</p>
+              <div className="flex gap-3 justify-end">
+                <Button variant="outline" onClick={() => setJobToDelete(null)} disabled={deletingId !== null}>
+                  Cancel
+                </Button>
+                <Button
+                  onClick={confirmDelete}
+                  isLoading={deletingId !== null}
+                  className="bg-red-600 hover:bg-red-700 text-white border-transparent"
+                >
+                  Delete
+                </Button>
+              </div>
+            </div>
+          </div>
+        </div>
+      )}
+    </>
   );
 }
