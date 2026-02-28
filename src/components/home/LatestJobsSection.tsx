@@ -42,7 +42,7 @@ export default function LatestJobsSection() {
         </svg>
       </div>
 
-      <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 relative z-10">
+      <div className="max-w-[1440px] mx-auto px-4 sm:px-12 lg:px-20 relative z-10">
         <div className="flex justify-between items-end mb-12">
           <h2 className="font-clash text-[48px] font-semibold text-[#25324B] leading-[110%] tracking-[0%]">
             Latest <span className="text-[#26A4FF]">jobs open</span>

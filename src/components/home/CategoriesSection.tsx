@@ -88,8 +88,8 @@ export default function CategoriesSection() {
   }, []);
 
   return (
-    <section className="bg-white py-16">
-      <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+    <section className="bg-white py-16 w-full">
+      <div className="max-w-[1440px] mx-auto px-4 sm:px-12 lg:px-20">
         <div className="flex justify-between items-center mb-8">
           <h2 className="text-3xl font-bold text-gray-900">
             Explore by <span className="text-indigo-600">category</span>

@@ -28,8 +28,8 @@ export default function FeaturedJobsSection() {
   }, []);
 
   return (
-    <section className="bg-white py-16">
-      <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+    <section className="bg-white py-16 w-full">
+      <div className="max-w-[1440px] mx-auto px-4 sm:px-12 lg:px-20">
         <div className="flex justify-between items-center mb-8">
           <h2 className="font-clash text-[48px] font-semibold text-[#25324B] leading-[1.1] tracking-[0%]">
             Featured <span className="text-[#26A4FF]">jobs</span>

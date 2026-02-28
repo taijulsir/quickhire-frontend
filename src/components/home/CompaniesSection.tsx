@@ -8,8 +8,8 @@ const companies = [
 
 export default function CompaniesSection() {
   return (
-    <section className="bg-white py-12 border-y border-gray-100">
-      <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+    <section className="bg-white py-12 border-y border-gray-100 w-full">
+      <div className="max-w-[1440px] mx-auto px-4 sm:px-12 lg:px-20">
         <p className="text-gray-500 text-sm mb-8">Companies we helped grow</p>
         <div className="flex flex-wrap justify-between items-center gap-8">
           {companies.map((company) => (

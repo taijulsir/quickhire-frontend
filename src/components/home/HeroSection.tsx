@@ -20,12 +20,12 @@ export default function HeroSection() {
   const popularSearches = ['UI Designer', 'UX Researcher', 'Android', 'Admin'];
 
   return (
-    <section className="relative overflow-hidden bg-[#F4F6FB] min-h-[calc(100vh-64px)] flex items-center w-full">
+    <section className="relative overflow-hidden bg-[#F4F6FB] min-h-[calc(100vh-80px)] flex items-center w-full">
       {/* Bottom Right Diagonal Shape */}
       <div className="absolute bottom-0 right-0 w-[100%] lg:w-[60%] h-[120px] lg:h-[350px] bg-white z-0" style={{ clipPath: 'polygon(100% 0, 100% 100%, 0 100%)' }}></div>
       
-      <div className="container mx-auto px-4 sm:px-6 lg:px-8 relative z-10 w-full max-w-7xl">
-        <div className="grid lg:grid-cols-2 items-center gap-12 lg:gap-8">
+      <div className="max-w-[1440px] mx-auto px-4 sm:px-12 lg:px-20 relative z-10 w-full">
+        <div className="grid lg:grid-cols-2 items-center gap-12 lg:gap-8 min-h-[600px]">
           {/* Left content */}
           <div className="max-w-xl xl:max-w-2xl pt-12 pb-10 lg:py-0 relative z-20">
             <h1 className="text-[44px] sm:text-6xl lg:text-[72px] font-extrabold text-[#192033] leading-[1.05] tracking-tight">
