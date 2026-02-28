@@ -21,7 +21,7 @@ export default function CTASection() {
             </Link>
           </div>
           <div className="relative hidden lg:block">
-            <div className="bg-white rounded-xl p-4 shadow-2xl">
+            {/* <div className="bg-white rounded-xl p-4 shadow-2xl">
               <div className="space-y-4">
                 <div className="flex items-center gap-4 p-3 bg-gray-50 rounded-lg">
                   <div className="w-10 h-10 bg-green-100 rounded-lg flex items-center justify-center">
@@ -62,7 +62,14 @@ export default function CTASection() {
                   <div className="text-xs text-gray-500">New Candidates</div>
                 </div>
               </div>
-            </div>
+            </div> */}
+            <Image
+              src="/images/dashboard/dashboard.png"
+              alt="dashboard"
+              width={500}
+              height={500}
+              className="w-full h-full object-cover"
+            />
           </div>
         </div>
       </div>

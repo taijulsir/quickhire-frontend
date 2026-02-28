@@ -1,6 +1,7 @@
 'use client';
 
 import Link from 'next/link';
+import Image from 'next/image';
 import { useState } from 'react';
 
 export default function Header() {
@@ -12,10 +13,8 @@ export default function Header() {
         <div className="flex justify-between items-center h-20">
           <div className="flex items-center gap-8">
             <Link href="/" className="flex items-center gap-2">
-              <div className="w-8 h-8 bg-indigo-600 rounded-lg flex items-center justify-center">
-                <span className="text-white font-bold text-sm">Q</span>
-              </div>
-              <span className="text-xl font-bold text-gray-900">QuickHire</span>
+              <Image src="/images/logos/logo.png" alt="QuickHire Logo" width={32} height={32} />
+              <span style={{ fontFamily: '"Red Hat Display", sans-serif', fontWeight: 700, fontSize: '24px', lineHeight: '150%', letterSpacing: '-0.01em', color: '#25324B' }}>QuickHire</span>
             </Link>
             <div className="hidden md:flex items-center gap-6">
               <Link href="/jobs" className="text-gray-600 hover:text-gray-900 text-sm font-medium">
