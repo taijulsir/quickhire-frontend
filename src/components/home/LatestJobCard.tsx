@@ -32,7 +32,7 @@ export default function LatestJobCard({ job }: LatestJobCardProps) {
   return (
     <Link
       href={`/jobs/${job._id}`}
-      className="flex items-center gap-6 p-6 border-none hover:shadow-lg transition-all bg-white group"
+      className="flex items-center gap-6 p-6 border border-[#D6DDEB] hover:border-[#4640DE] hover:shadow-lg transition-all bg-white group"
     >
       <div className="w-[46px] h-[46px] shrink-0 overflow-hidden relative">
         {job.companyLogo ? (
@@ -56,23 +56,23 @@ export default function LatestJobCard({ job }: LatestJobCardProps) {
         <p className="font-epilogue text-[16px] text-[#7C8493] leading-[160%]">
           {job.company} <span className="mx-1">•</span> {job.location}
         </p>
-      </div>
-      <div className="flex flex-wrap gap-2 items-center">
-        <span className="px-4 py-1 text-[14px] font-semibold font-epilogue bg-[#56CDAD1A] text-[#56CDAD] rounded-full">
-          {job.type}
-        </span>
-        <div className="w-[1px] h-8 bg-[#D6DDEB] mx-2" />
-        {job.tags?.slice(0, 2).map((tag) => {
-          const styles = getTagStyles(tag);
-          return (
-            <span 
-              key={tag} 
-              className={`px-4 py-1 rounded-full text-[14px] font-semibold font-epilogue border ${styles.border} ${styles.text}`}
-            >
-              {tag}
-            </span>
-          );
-        })}
+        <div className="flex flex-wrap gap-2 items-center mt-2">
+          <span className="px-4 py-1 text-[14px] font-semibold font-epilogue bg-[#56CDAD1A] text-[#56CDAD] rounded-full">
+            {job.type}
+          </span>
+          <div className="w-px h-6 bg-[#D6DDEB] mx-2" />
+          {job.tags?.slice(0, 2).map((tag) => {
+            const styles = getTagStyles(tag);
+            return (
+              <span 
+                key={tag} 
+                className={`px-4 py-1 rounded-full text-[14px] font-semibold font-epilogue border ${styles.border} ${styles.text}`}
+              >
+                {tag}
+              </span>
+            );
+          })}
+        </div>
       </div>
     </Link>
   );
