@@ -1,6 +1,8 @@
 import Link from 'next/link';
+import Image from 'next/image';
 import { Job } from '@/types';
 import { Tag } from '@/components/common';
+import { BASE_URL } from '@/services/api';
 
 interface LatestJobCardProps {
   job: Job;
@@ -16,15 +18,22 @@ export default function LatestJobCard({ job }: LatestJobCardProps) {
     if (tag.toLowerCase() === 'design') return 'primary';
     return 'outline';
   };
+  console.log('LatestJobCard rendered for job:', job.title);
+  console.log('job.companyLogo.startsWith("/images"):', job.companyLogo?.startsWith('/images'));  
 
   return (
     <Link
       href={`/jobs/${job._id}`}
       className="flex items-center gap-4 p-4 border border-gray-200 rounded-lg hover:border-indigo-300 hover:shadow-md transition-all bg-white"
     >
-      <div className="w-12 h-12 bg-gray-100 rounded-lg flex items-center justify-center flex-shrink-0">
+      <div className="w-12 h-12 bg-gray-100 rounded-lg flex items-center justify-center shrink-0 overflow-hidden relative">
         {job.companyLogo ? (
-          <img src={job.companyLogo} alt={job.company} className="w-8 h-8 object-contain" />
+          <Image 
+            src={job.companyLogo.startsWith('/images') ? job.companyLogo : job.companyLogo} 
+            alt={job.company} 
+            fill
+            className="object-cover" 
+          />
         ) : (
           <span className="text-gray-600 font-bold text-sm">{getCompanyInitials(job.company)}</span>
         )}
