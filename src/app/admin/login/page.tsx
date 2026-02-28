@@ -3,6 +3,7 @@
 import { useState } from 'react';
 import { useRouter } from 'next/navigation';
 import Link from 'next/link';
+import Image from 'next/image';
 import { Input, Button } from '@/components/common';
 import { authService } from '@/services';
 
@@ -39,11 +40,9 @@ export default function AdminLoginPage() {
     <div className="min-h-screen flex items-center justify-center bg-gray-50 px-4">
       <div className="w-full max-w-md">
         <div className="text-center mb-8">
-          <Link href="/" className="inline-flex items-center gap-2 mb-8">
-            <div className="w-10 h-10 bg-indigo-600 rounded-lg flex items-center justify-center">
-              <span className="text-white font-bold">Q</span>
-            </div>
-            <span className="text-2xl font-bold text-gray-900">QuickHire</span>
+          <Link href="/" className="inline-flex  items-center gap-2 mb-8">
+            <Image src="/images/logos/logo.png" alt="QuickHire Logo" width={48} height={48} />
+            <span style={{ fontFamily: '"Red Hat Display", sans-serif', fontWeight: 700, fontSize: '24px', lineHeight: '150%', letterSpacing: '-0.01em', color: '#25324B' }}>QuickHire</span>
           </Link>
           <h1 className="text-2xl font-bold text-gray-900 mb-2">Admin Login</h1>
           <p className="text-gray-600">Sign in to manage your job postings</p>
