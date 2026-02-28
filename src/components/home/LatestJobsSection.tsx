@@ -28,33 +28,36 @@ export default function LatestJobsSection() {
   }, []);
 
   return (
-    <section className="bg-gray-50 py-16">
-      <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
-        <div className="flex justify-between items-center mb-8">
-          <h2 className="text-3xl font-bold text-gray-900">
-            Latest<span className="text-indigo-600">jobs open</span>
+    <section className="bg-white py-20 relative overflow-hidden">
+      {/* Background decoration */}
+      <div className="absolute top-0 right-0 w-1/3 h-full pointer-events-none opacity-5">
+        <svg width="430" height="916" viewBox="0 0 430 916" fill="none" xmlns="http://www.w3.org/2000/svg">
+          <path d="M430 0H0V916H430V0Z" fill="url(#paint0_linear)"/>
+          <defs>
+            <linearGradient id="paint0_linear" x1="215" y1="0" x2="215" y2="916" gradientUnits="userSpaceOnUse">
+              <stop stopColor="#4640DE"/>
+              <stop offset="1" stopColor="white" stopOpacity="0"/>
+            </linearGradient>
+          </defs>
+        </svg>
+      </div>
+
+      <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 relative z-10">
+        <div className="flex justify-between items-end mb-12">
+          <h2 className="font-clash text-[48px] font-semibold text-[#25324B] leading-[110%] tracking-[0%]">
+            Latest <span className="text-[#26A4FF]">jobs open</span>
           </h2>
-          <Link href="/jobs" className="text-indigo-600 hover:text-indigo-700 font-medium flex items-center gap-2">
+          <Link href="/jobs" className="text-[#4640DE] font-epilogue font-semibold text-[16px] leading-[160%] flex items-center gap-2 hover:opacity-80 transition-opacity mb-2">
             Show all jobs
-            <svg className="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-              <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M9 5l7 7-7 7" />
+            <svg width="24" height="24" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
+              <path d="M16.172 11L10.808 5.63605L12.222 4.22183L20 12L12.222 19.7782L10.808 18.364L16.172 13H4V11H16.172Z" fill="currentColor"/>
             </svg>
           </Link>
         </div>
-        <div className="grid grid-cols-1 lg:grid-cols-2 gap-4">
+        <div className="grid grid-cols-1 lg:grid-cols-2 gap-6">
           {loading
             ? Array(8).fill(0).map((_, i) => (
-                <div key={i} className="flex items-center gap-4 p-4 border border-gray-200 rounded-lg animate-pulse bg-white">
-                  <div className="w-12 h-12 bg-gray-200 rounded-lg" />
-                  <div className="flex-1">
-                    <div className="h-5 bg-gray-200 rounded w-1/2 mb-2" />
-                    <div className="h-4 bg-gray-200 rounded w-1/3" />
-                  </div>
-                  <div className="flex gap-2">
-                    <div className="h-6 bg-gray-200 rounded-full w-16" />
-                    <div className="h-6 bg-gray-200 rounded-full w-16" />
-                  </div>
-                </div>
+                <div key={i} className="h-[120px] bg-white animate-pulse" />
               ))
             : jobs.slice(0, 8).map((job) => (
                 <LatestJobCard key={job._id} job={job} />
