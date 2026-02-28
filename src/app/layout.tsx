@@ -1,9 +1,22 @@
 import type { Metadata } from "next";
-import { Inter } from "next/font/google";
+import { Inter, Epilogue } from "next/font/google";
+import localFont from "next/font/local";
 import "./globals.css";
 
 const inter = Inter({
+  variable: "--font-inter",
   subsets: ["latin"],
+});
+
+const epilogue = Epilogue({
+  variable: "--font-epilogue",
+  subsets: ["latin"],
+});
+
+const clashDisplay = localFont({
+  src: "../../public/fonts/ClashDisplay-Variable.woff2",
+  variable: "--font-clash-display",
+  display: "swap",
 });
 
 export const metadata: Metadata = {
@@ -18,7 +31,7 @@ export default function RootLayout({
 }>) {
   return (
     <html lang="en">
-      <body className={`${inter.className} antialiased overflow-x-hidden`}>
+      <body className={`${inter.variable} ${epilogue.variable} ${clashDisplay.variable} font-inter antialiased overflow-x-hidden`}>
         {children}
       </body>
     </html>
