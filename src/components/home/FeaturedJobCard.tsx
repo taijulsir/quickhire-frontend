@@ -51,14 +51,14 @@ export default function FeaturedJobCard({ job }: FeaturedJobCardProps) {
       className="block p-6 border border-[#D6DDEB] rounded-none hover:border-[#4640DE] hover:shadow-md transition-all bg-white group"
     >
       <div className="flex items-start justify-between mb-6">
-        <div className="w-12 h-12 flex items-center justify-center overflow-hidden relative">
+        <div className="w-12 h-12 flex items-center justify-center overflow-hidden relative rounded-full">
           {job.companyLogo ? (
             <Image 
               src={job.companyLogo} 
               alt={job.company} 
               width={48}
               height={48}
-              className="object-contain" 
+              className="object-cover w-full h-full" 
             />
           ) : (
             <div className="w-full h-full bg-gray-100 flex items-center justify-center">
