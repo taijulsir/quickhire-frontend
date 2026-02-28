@@ -44,8 +44,19 @@ export const jobService = {
     return response.data;
   },
 
-  async create(data: Omit<Job, '_id' | 'created_at' | 'updated_at'>): Promise<ApiResponse<Job>> {
-    const response = await api.post('/jobs', data);
+  async create(data: Omit<Job, '_id' | 'created_at' | 'updated_at'> | FormData): Promise<ApiResponse<Job>> {
+    const isFormData = typeof FormData !== 'undefined' && data instanceof FormData;
+    const response = await api.post('/jobs', data, {
+      headers: isFormData ? { 'Content-Type': 'multipart/form-data' } : undefined,
+    });
+    return response.data;
+  },
+
+  async update(id: string, data: Partial<Job> | FormData): Promise<ApiResponse<Job>> {
+    const isFormData = typeof FormData !== 'undefined' && data instanceof FormData;
+    const response = await api.put(`/jobs/${id}`, data, {
+      headers: isFormData ? { 'Content-Type': 'multipart/form-data' } : undefined,
+    });
     return response.data;
   },
 

@@ -7,7 +7,7 @@ export const applicationService = {
     return response.data;
   },
 
-  async getAll(): Promise<ApiResponse<Application[]>> {
+  async getAll(): Promise<ApiResponse<{ applications: Application[] }>> {
     const response = await api.get('/applications');
     return response.data;
   },
