@@ -15,34 +15,26 @@ export default function FeaturedJobCard({ job }: FeaturedJobCardProps) {
 
   const getTagStyles = (tag: string) => {
     const lowerTag = tag.toLowerCase();
-    if (lowerTag === 'marketing') {
-      return {
-        bg: 'bg-[#FFB836]/10',
-        text: 'text-[#FFB836]'
-      };
+    switch (lowerTag) {
+      case 'marketing':
+        return { bg: 'bg-[#EB85331A]', text: 'text-[#FFB836]' };
+      case 'design':
+        return { bg: 'bg-[#56CDAD1A]', text: 'text-[#56CDAD]' };
+      case 'business':
+        return { bg: 'bg-[#4640DE1A]', text: 'text-[#4640DE]' };
+      case 'technology':
+        return { bg: 'bg-[#FF65501A]', text: 'text-[#FF6550]' };
+      case 'finance':
+        return { bg: 'bg-[#26A4FF1A]', text: 'text-[#26A4FF]' };
+      case 'engineering':
+        return { bg: 'bg-[#7B61FF1A]', text: 'text-[#7B61FF]' };
+      case 'sales':
+        return { bg: 'bg-[#F94D6A1A]', text: 'text-[#F94D6A]' };
+      case 'human resource':
+        return { bg: 'bg-[#00B0741A]', text: 'text-[#00B074]' };
+      default:
+        return { bg: 'bg-gray-100', text: 'text-gray-600' };
     }
-    if (lowerTag === 'design') {
-      return {
-        bg: 'bg-[#56CDAD]/10',
-        text: 'text-[#56CDAD]'
-      };
-    }
-    if (lowerTag === 'business') {
-      return {
-        bg: 'bg-[#4640DE]/10',
-        text: 'text-[#4640DE]'
-      };
-    }
-    if (lowerTag === 'technology') {
-      return {
-        bg: 'bg-[#FF6550]/10',
-        text: 'text-[#FF6550]'
-      };
-    }
-    return {
-      bg: 'bg-gray-100',
-      text: 'text-gray-600'
-    };
   };
 
   return (
