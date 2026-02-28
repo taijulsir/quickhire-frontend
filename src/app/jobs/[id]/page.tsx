@@ -3,9 +3,11 @@
 import { useEffect, useState } from 'react';
 import { useParams, useRouter } from 'next/navigation';
 import Link from 'next/link';
+import Image from 'next/image';
 import { Header, Footer, Tag, Button } from '@/components/common';
 import { ApplicationForm } from '@/components/jobs';
 import { jobService } from '@/services';
+import { BASE_URL } from '@/services/api';
 import { Job } from '@/types';
 
 export default function JobDetailPage() {
@@ -125,9 +127,14 @@ export default function JobDetailPage() {
             <div className="lg:col-span-2">
               <div className="bg-white rounded-lg border border-gray-200 p-6 mb-6">
                 <div className="flex items-start gap-4 mb-6">
-                  <div className="w-16 h-16 bg-gray-100 rounded-lg flex items-center justify-center flex-shrink-0">
+                  <div className="w-16 h-16 bg-gray-100 rounded-lg flex items-center justify-center shrink-0 overflow-hidden relative">
                     {job.companyLogo ? (
-                      <img src={job.companyLogo} alt={job.company} className="w-12 h-12 object-contain" />
+                      <Image 
+                        src={job.companyLogo.startsWith('/images') ? job.companyLogo : job.companyLogo} 
+                        alt={job.company} 
+                        fill
+                        className="object-cover" 
+                      />
                     ) : (
                       <span className="text-gray-600 font-bold text-xl">{getCompanyInitials(job.company)}</span>
                     )}
