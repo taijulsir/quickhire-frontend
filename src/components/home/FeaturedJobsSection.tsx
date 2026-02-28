@@ -31,13 +31,13 @@ export default function FeaturedJobsSection() {
     <section className="bg-white py-16">
       <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
         <div className="flex justify-between items-center mb-8">
-          <h2 className="text-3xl font-bold text-gray-900">
-            Featured<span className="text-indigo-600">jobs</span>
+          <h2 className="font-clash text-[48px] font-semibold text-[#25324B] leading-[1.1] tracking-[0%]">
+            Featured <span className="text-[#26A4FF]">jobs</span>
           </h2>
-          <Link href="/jobs" className="text-indigo-600 hover:text-indigo-700 font-medium flex items-center gap-2">
+          <Link href="/jobs" className="text-[#4640DE] font-epilogue font-semibold text-[16px] leading-[1.6] tracking-[0%] flex items-center gap-2 hover:opacity-80 transition-opacity">
             Show all jobs
-            <svg className="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-              <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M9 5l7 7-7 7" />
+            <svg width="24" height="24" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
+              <path d="M16.172 11L10.808 5.63605L12.222 4.22183L20 12L12.222 19.7782L10.808 18.364L16.172 13H4V11H16.172Z" fill="currentColor"/>
             </svg>
           </Link>
         </div>
