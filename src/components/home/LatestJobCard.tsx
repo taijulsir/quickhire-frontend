@@ -56,23 +56,24 @@ export default function LatestJobCard({ job }: LatestJobCardProps) {
         <p className="font-epilogue text-[16px] text-[#7C8493] leading-[160%]">
           {job.company} <span className="mx-1">•</span> {job.location}
         </p>
-        <div className="flex flex-wrap gap-2 items-center mt-2">
-          <span className="px-4 py-1 text-[14px] font-semibold font-epilogue bg-[#56CDAD1A] text-[#56CDAD] rounded-full">
-            {job.type}
-          </span>
-          <div className="w-px h-6 bg-[#D6DDEB] mx-2" />
-          {job.tags?.slice(0, 2).map((tag) => {
-            const styles = getTagStyles(tag);
-            return (
-              <span 
-                key={tag} 
-                className={`px-4 py-1 rounded-full text-[14px] font-semibold font-epilogue border ${styles.border} ${styles.text}`}
-              >
-                {tag}
-              </span>
-            );
-          })}
-        </div>
+      </div>
+      
+      <div className="flex flex-wrap gap-2 items-center">
+        <span className="px-4 py-1 text-[14px] font-semibold font-epilogue bg-[#56CDAD1A] text-[#56CDAD] rounded-full">
+          {job.type}
+        </span>
+        <div className="w-px h-6 bg-[#D6DDEB] mx-2 hidden sm:block" />
+        {job.tags?.slice(0, 2).map((tag) => {
+          const styles = getTagStyles(tag);
+          return (
+            <span 
+              key={tag} 
+              className={`px-4 py-1 rounded-full text-[14px] font-semibold font-epilogue border ${styles.border} ${styles.text}`}
+            >
+              {tag}
+            </span>
+          );
+        })}
       </div>
     </Link>
   );
