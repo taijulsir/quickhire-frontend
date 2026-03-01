@@ -10,6 +10,15 @@ export interface JobFilters {
   limit?: number;
 }
 
+export interface SearchResult {
+  _id: string;
+  jobName: string;
+  companyName: string;
+  location: string;
+  logo: string;
+  time: string;
+}
+
 export const jobService = {
   async getAll(filters: JobFilters = {}): Promise<PaginatedResponse<Job>> {
     const params = new URLSearchParams();
@@ -54,7 +63,7 @@ export const jobService = {
 
   async update(id: string, data: Partial<Job> | FormData): Promise<ApiResponse<Job>> {
     const isFormData = typeof FormData !== 'undefined' && data instanceof FormData;
-    const response = await api.put(`/jobs/${id}`, data, {
+    const response = await api.patch(`/jobs/${id}`, data, {
       headers: isFormData ? { 'Content-Type': 'multipart/form-data' } : undefined,
     });
     return response.data;
@@ -62,6 +71,16 @@ export const jobService = {
 
   async delete(id: string): Promise<ApiResponse<null>> {
     const response = await api.delete(`/jobs/${id}`);
+    return response.data;
+  },
+
+  async searchJobs(q: string): Promise<SearchResult[]> {
+    const response = await api.get('/public/jobs/search', { params: { q } });
+    return response.data;
+  },
+
+  async getLocations(): Promise<string[]> {
+    const response = await api.get('/public/locations');
     return response.data;
   },
 };
