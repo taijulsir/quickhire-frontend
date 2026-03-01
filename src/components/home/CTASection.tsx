@@ -1,78 +1,92 @@
-import Image from 'next/image';
-import Link from 'next/link';
+import Image from "next/image";
+import Link from "next/link";
 
-export default function CTASection() {
-  return (
-    <section className="bg-indigo-600 py-16">
-      <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
-        <div className="grid lg:grid-cols-2 gap-12 items-center">
-          <div className="text-white">
-            <h2 className="text-3xl lg:text-4xl font-bold mb-4">
-              Start posting<br />jobs today
-            </h2>
-            <p className="text-indigo-100 mb-8">
-              Start posting jobs for only $10.
-            </p>
-            <Link
-              href="/admin/login"
-              className="inline-block bg-white text-indigo-600 px-6 py-3 rounded-lg font-semibold hover:bg-gray-100 transition-colors"
-            >
-              Sign Up For Free
-            </Link>
-          </div>
-          <div className="relative hidden lg:block">
-            {/* <div className="bg-white rounded-xl p-4 shadow-2xl">
-              <div className="space-y-4">
-                <div className="flex items-center gap-4 p-3 bg-gray-50 rounded-lg">
-                  <div className="w-10 h-10 bg-green-100 rounded-lg flex items-center justify-center">
-                    <span className="text-green-600 font-bold">76</span>
-                  </div>
-                  <div className="flex-1">
-                    <div className="text-sm font-medium text-gray-900">Applications</div>
-                    <div className="text-xs text-gray-500">This month</div>
-                  </div>
+export default function JobPosting() {
+    return (
+        <section>
+            {/* Desktop Layout */}
+            <div className="hidden md:block relative overflow-hidden">
+                {/* Blue background with clip-path for top-left circle and bottom-right triangle */}
+                <div
+                    className="absolute inset-0 bg-[#4640DE]"
+                    style={{
+                        clipPath: 'polygon(15% 0, 100% 0, 100% 70%, 85% 100%, 0 100%, 0 30%)',
+                    }}
+                />
+
+                <div className="relative flex items-center min-h-105 lg:min-h-115 mx-5 md:mx-20 2xl:mx-30 3xl:mx-40">
+                    {/* Left text content */}
+                    <div className="w-[45%] lg:w-[40%] py-16 pr-8">
+                        <h2 className="text-3xl lg:text-4xl xl:text-[42px] font-bold text-white font-red-hat-display leading-tight mb-5">
+                            Start posting<br />jobs today
+                        </h2>
+                        <p className="text-white/80 text-base lg:text-lg mb-8">
+                            Start posting jobs for only $10.
+                        </p>
+                        <Link
+                            href="/login"
+                            className="inline-flex items-center justify-center w-fit px-8 py-3.5 bg-white text-[#25324B] font-bold text-base hover:bg-gray-50 transition-colors cursor-pointer"
+                        >
+                            Sign Up For Free
+                        </Link>
+                    </div>
+
+                    {/* Right dashboard image - extends to edge and crops at bottom */}
+                    <div className="w-[55%] lg:w-[60%] flex items-end justify-end pt-8 self-stretch overflow-hidden">
+                        <div className="relative w-full max-w-170 xl:max-w-190">
+                            <Image
+                                src="/images/jobposting/dashboard.png"
+                                alt="QuickHire Dashboard - Job posting management interface"
+                                width={800}
+                                height={550}
+                                className="w-full h-auto shadow-2xl"
+                                quality={90}
+                            />
+                        </div>
+                    </div>
                 </div>
-                <div className="grid grid-cols-2 gap-4">
-                  <div className="p-3 bg-amber-50 rounded-lg">
-                    <div className="text-2xl font-bold text-amber-600">24</div>
-                    <div className="text-xs text-gray-500">Interviews Scheduled</div>
-                  </div>
-                  <div className="p-3 bg-blue-50 rounded-lg">
-                    <div className="text-2xl font-bold text-blue-600">158</div>
-                    <div className="text-xs text-gray-500">Total Views</div>
-                  </div>
+            </div>
+
+            {/* Mobile Layout */}
+            <div className="block md:hidden">
+                {/* Blue section with diagonal crops */}
+                <div className="relative overflow-hidden">
+                    <div
+                        className="absolute inset-0 bg-[#4640DE]"
+                        style={{
+                            clipPath: 'polygon(25% 0, 100% 0, 100% 80%, 80% 100%, 0 100%, 0 20%)',
+                        }}
+                    />
+                    <div className="relative text-center px-6 pt-20 pb-8">
+                        <h2 className="text-3xl font-bold text-white font-red-hat-display leading-tight mb-4">
+                            Start posting jobs<br />today
+                        </h2>
+                        <p className="text-white/80 text-base mb-8">
+                            Start posting jobs for only $10.
+                        </p>
+                        <Link
+                            href="/login"
+                            className="inline-flex items-center justify-center w-full max-w-xs px-8 py-3.5 bg-white text-[#25324B] font-bold text-base hover:bg-gray-50 transition-colors cursor-pointer"
+                        >
+                            Sign Up For Free
+                        </Link>
+                    </div>
+
+                    {/* Dashboard image inside blue section */}
+                    <div className="relative px-5 pb-10">
+                        <div className="relative max-w-md mx-auto">
+                            <Image
+                                src="/images/jobposting/dashboard.png"
+                                alt="QuickHire Dashboard - Job posting management interface"
+                                width={500}
+                                height={400}
+                                className="w-full h-auto rounded-lg shadow-xl"
+                                quality={90}
+                            />
+                        </div>
+                    </div>
                 </div>
-                <div className="p-3 bg-gray-50 rounded-lg">
-                  <div className="flex justify-between items-center mb-2">
-                    <span className="text-sm font-medium text-gray-900">Job Views</span>
-                    <span className="text-xs text-gray-500">12</span>
-                  </div>
-                  <div className="h-24 flex items-end gap-1">
-                    {[40, 60, 45, 80, 55, 70, 65, 90, 50, 75, 85, 60].map((h, i) => (
-                      <div key={i} className="flex-1 bg-indigo-200 rounded-t" style={{ height: `${h}%` }} />
-                    ))}
-                  </div>
-                </div>
-                <div className="flex items-center gap-4 p-3 bg-indigo-50 rounded-lg">
-                  <div className="text-3xl font-bold text-indigo-600">2,342</div>
-                  <div className="text-sm text-gray-500">Messages Received</div>
-                </div>
-                <div className="p-3 bg-green-50 rounded-lg">
-                  <div className="text-2xl font-bold text-green-600">67</div>
-                  <div className="text-xs text-gray-500">New Candidates</div>
-                </div>
-              </div>
-            </div> */}
-            <Image
-              src="/images/dashboard/dashboard.png"
-              alt="dashboard"
-              width={500}
-              height={500}
-              className="w-full h-full object-cover"
-            />
-          </div>
-        </div>
-      </div>
-    </section>
-  );
+            </div>
+        </section>
+    )
 }

@@ -10,7 +10,7 @@ interface CategoryCardProps {
 export default function CategoryCard({ name, count, icon, isActive = false }: CategoryCardProps) {
   return (
     <Link
-      href={`/jobs?category=${encodeURIComponent(name)}`}
+      href={`/jobs/category/${encodeURIComponent(name)}`}
       className={`p-6 rounded-lg border transition-all hover:shadow-lg ${
         isActive
           ? 'bg-indigo-600 border-indigo-600 text-white'
