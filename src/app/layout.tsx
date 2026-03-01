@@ -14,7 +14,7 @@ const epilogue = Epilogue({
 });
 
 const clashDisplay = localFont({
-  src: "../../public/fonts/ClashDisplay-Variable.woff2",
+  src: "../fonts/ClashDisplay-Variable.woff2",
   variable: "--font-clash-display",
   display: "swap",
 });

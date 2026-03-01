@@ -1,9 +1,9 @@
 @import "tailwindcss";
 
 @theme {
-  --font-inter: var(--font-inter), sans-serif;
-  --font-epilogue: var(--font-epilogue), sans-serif;
-  --font-clash-display: ClashDisplay, var(--font-clash-display), sans-serif;
+  --font-inter: var(--font-inter);
+  --font-epilogue: var(--font-epilogue);
+  --font-clash: var(--font-clash-display);
 }
 
 :root {
@@ -11,16 +11,10 @@
   --foreground: #171717;
 }
 
-@font-face {
-  font-family: 'ClashDisplay';
-  src: url('/fonts/ClashDisplay-Variable.woff2') format('woff2');
-  font-weight: 200 700;
-  font-style: normal;
-}
-
 body {
   background: var(--background);
   color: var(--foreground);
+  font-family: var(--font-inter);
 }
 
 .line-clamp-2 {
