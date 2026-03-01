@@ -28,9 +28,10 @@ export default function JobCard({ job }: JobCardProps) {
         <div className="w-14 h-14 bg-gray-100 rounded-lg flex items-center justify-center overflow-hidden relative">
           {job.companyLogo ? (
             <Image 
-              src={job.companyLogo.startsWith('/images') ? job.companyLogo : job.companyLogo} 
+              src={job.companyLogo.startsWith('http') ? job.companyLogo : `${BASE_URL}${job.companyLogo}`}
               alt={job.company} 
               fill
+              unoptimized
               className="object-cover" 
             />
           ) : (

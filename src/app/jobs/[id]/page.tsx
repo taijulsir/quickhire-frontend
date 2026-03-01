@@ -4,7 +4,7 @@ import { useEffect, useState } from 'react';
 import { useParams, useRouter } from 'next/navigation';
 import Link from 'next/link';
 import Image from 'next/image';
-import { Header, Footer, Tag, Button } from '@/components/common';
+import { Navbar, Footer, Tag, Button, PageHeader } from '@/components/common';
 import { ApplicationForm } from '@/components/jobs';
 import { jobService } from '@/services';
 import { BASE_URL } from '@/services/api';
@@ -59,7 +59,7 @@ export default function JobDetailPage() {
   if (loading) {
     return (
       <div className="min-h-screen flex flex-col">
-        <Header />
+        <Navbar />
         <main className="flex-1 bg-gray-50 py-8">
           <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
             <div className="animate-pulse">
@@ -83,7 +83,7 @@ export default function JobDetailPage() {
   if (error || !job) {
     return (
       <div className="min-h-screen flex flex-col">
-        <Header />
+        <Navbar />
         <main className="flex-1 bg-gray-50 flex items-center justify-center">
           <div className="text-center">
             <svg
@@ -111,17 +111,15 @@ export default function JobDetailPage() {
 
   return (
     <div className="min-h-screen flex flex-col">
-      <Header />
+      <Navbar />
       <main className="flex-1 bg-gray-50 py-8">
         <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
-          <nav className="mb-6">
-            <Link href="/jobs" className="text-indigo-600 hover:text-indigo-700 flex items-center gap-2 text-sm">
-              <svg className="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M15 19l-7-7 7-7" />
-              </svg>
-              Back to Jobs
-            </Link>
-          </nav>
+          <PageHeader
+            backHref="/jobs"
+            backLabel="Back to Jobs"
+            title={job.title}
+            subtitle={`${job.company} · ${job.location}`}
+          />
 
           <div className="grid lg:grid-cols-3 gap-8">
             <div className="lg:col-span-2">
@@ -130,9 +128,10 @@ export default function JobDetailPage() {
                   <div className="w-16 h-16 bg-gray-100 rounded-lg flex items-center justify-center shrink-0 overflow-hidden relative">
                     {job.companyLogo ? (
                       <Image 
-                        src={job.companyLogo.startsWith('/images') ? job.companyLogo : job.companyLogo} 
+                        src={job.companyLogo.startsWith('http') ? job.companyLogo : `${BASE_URL}${job.companyLogo}`}
                         alt={job.company} 
                         fill
+                        unoptimized
                         className="object-cover" 
                       />
                     ) : (

@@ -2,7 +2,7 @@
 
 import { useEffect, useState, useCallback, Suspense } from 'react';
 import { useSearchParams } from 'next/navigation';
-import { Header, Footer } from '@/components/common';
+import { Navbar, Footer } from '@/components/common';
 import { JobCard, JobFilters } from '@/components/jobs';
 import { jobService } from '@/services';
 import { Job } from '@/types';
@@ -146,7 +146,7 @@ function JobsContent() {
 export default function JobsPage() {
   return (
     <div className="min-h-screen flex flex-col bg-gray-50">
-      <Header />
+      <Navbar />
       <main className="flex-1 py-8">
         <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
           <Suspense fallback={

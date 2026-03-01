@@ -1,6 +1,8 @@
 'use client';
 
+import { useEffect, useState } from 'react';
 import { Input, Select } from '@/components/common';
+import { jobService } from '@/services';
 
 interface JobFiltersProps {
   search: string;
@@ -31,6 +33,28 @@ export default function JobFilters({
   onCategoryChange,
   onLocationChange,
 }: JobFiltersProps) {
+  const [locations, setLocations] = useState<{ value: string; label: string }[]>([
+    { value: '', label: 'All Locations' },
+  ]);
+
+  useEffect(() => {
+    const fetchLocations = async () => {
+      try {
+        const response = await jobService.getLocations();
+        if (Array.isArray(response)) {
+          const locationOptions = response.map((loc: string) => ({
+            value: loc,
+            label: loc,
+          }));
+          setLocations([{ value: '', label: 'All Locations' }, ...locationOptions]);
+        }
+      } catch (error) {
+        console.error('Failed to fetch locations:', error);
+      }
+    };
+    fetchLocations();
+  }, []);
+
   return (
     <div className="bg-white p-6 rounded-xl shadow-sm border border-gray-200">
       <div className="grid grid-cols-1 md:grid-cols-3 gap-4">
@@ -61,34 +85,11 @@ export default function JobFilters({
           value={category}
           onChange={(e) => onCategoryChange(e.target.value)}
         />
-        <div className="relative">
-          <svg
-            className="absolute left-3 top-1/2 -translate-y-1/2 w-5 h-5 text-gray-400"
-            fill="none"
-            stroke="currentColor"
-            viewBox="0 0 24 24"
-          >
-            <path
-              strokeLinecap="round"
-              strokeLinejoin="round"
-              strokeWidth={2}
-              d="M17.657 16.657L13.414 20.9a1.998 1.998 0 01-2.827 0l-4.244-4.243a8 8 0 1111.314 0z"
-            />
-            <path
-              strokeLinecap="round"
-              strokeLinejoin="round"
-              strokeWidth={2}
-              d="M15 11a3 3 0 11-6 0 3 3 0 016 0z"
-            />
-          </svg>
-          <Input
-            type="text"
-            placeholder="Location..."
-            value={location}
-            onChange={(e) => onLocationChange(e.target.value)}
-            className="pl-10"
-          />
-        </div>
+        <Select
+          options={locations}
+          value={location}
+          onChange={(e) => onLocationChange(e.target.value)}
+        />
       </div>
     </div>
   );
