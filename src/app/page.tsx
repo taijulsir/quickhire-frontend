@@ -1,4 +1,4 @@
-import { Header, Footer } from '@/components/common';
+import { Navbar, Footer } from '@/components/common';
 import {
   HeroSection,
   CompaniesSection,
@@ -10,16 +10,19 @@ import {
 
 export default function Home() {
   return (
-    <div className="min-h-screen flex flex-col">
-      <Header />
-      <main className="flex-1">
+    <div className='max-w-480 mx-auto'>
+      <div className='bg-[#F8F8FD] md:min-h-screen md:h-screen md:[clip-path:polygon(0_0,100%_0,100%_70%,70%_100%,0_100%)]'>
+        <Navbar />
         <HeroSection />
+
+      </div>
+      <main className='mx-5 md:mx-20 2xl:mx-30 3xl:mx-40'>
         <CompaniesSection />
         <CategoriesSection />
         <CTASection />
         <FeaturedJobsSection />
-        <LatestJobsSection />
       </main>
+      <LatestJobsSection />
       <Footer />
     </div>
   );
